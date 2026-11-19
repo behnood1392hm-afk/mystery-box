@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<DOCTYPE! html>
 <html lang="fa" dir="rtl">
 <head>
   <style>
@@ -249,6 +249,30 @@ body > * {
     100% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(2.5);
+      /* بنر اصلی */
+.banner {
+    width: 100%;
+    max-width: 900px;
+    height: 190px;
+    margin: 0 auto 30px;
+    border: 2px solid #d4af37;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #080808, #49380d, #080808);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px #d4af3744;
+}
+
+.banner h2 {
+    color: #f5d778;
+    font-size: 30px;
+}
+
+.banner p {
+    color: white;
+    font-size: 15px;
+}
  </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -474,6 +498,30 @@ function goBack() {
     document.getElementById('details').style.display = 'none';
     document.querySelector('.products').style.display = 'grid';
     window.scrollTo(0, 0);
+}function showMysteryVault() {
+    document.getElementById("mysteryVaultLock").style.display = "flex";
+}
+
+function closeMysteryVault() {
+    document.getElementById("mysteryVaultLock").style.display = "none";
+}
+    function showMysteryVault() {
+    document.getElementById("mysteryVaultLock").style.display = "flex";
+}
+
+function closeMysteryVault() {
+    document.getElementById("mysteryVaultLock").style.display = "none";
+}
+
+function checkMysteryPassword() {
+    const password = document.getElementById("mysteryPassword").value;
+
+    if (password === "666") {
+        document.getElementById("mysteryVaultLock").style.display = "none";
+        document.getElementById("mysteryEvilSite").style.display = "block";
+    } else {
+        alert("رمز اشتباه است!");
+    }
 }
   </script>
   <a href="https://ble.ir/Behnood1392"
@@ -481,5 +529,389 @@ function goBack() {
    style="display:block; text-align:center; background:#d4af37; color:#000; padding:15px; margin:25px auto; border-radius:12px; text-decoration:none; font-weight:bold;">
    ارتباط با ما در بله
   </a>
-</body>
-</html>
+  <style>
+
+/* ظاهر بخش مخفی */
+
+.secret-entry {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 99999;
+    background: #850000;
+    color: white;
+    border: 1px solid red;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.secret-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: #080000;
+    justify-content: center;
+    align-items: center;
+}
+
+.secret-box {
+    background: #160000;
+    border: 2px solid #850000;
+    border-radius: 18px;
+    padding: 30px;
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 30px red;
+}
+
+.secret-box h1 {
+    color: #ff0000;
+}
+
+.secret-box input {
+    width: 90%;
+    padding: 12px;
+    margin: 15px 0;
+    background: #080000;
+    color: white;
+    border: 1px solid red;
+    border-radius: 8px;
+}
+
+.secret-box button {
+    background: #850000;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    }.secret-box .close-secret {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    color: #ff0000;
+    border: 1px solid red;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.secret-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: radial-gradient(circle, #500000, #000000);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.secret-box {
+    width: 100%;
+    max-width: 350px;
+    background: #100000;
+    border: 2px solid #a00000;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 30px red;
+    color: white;
+}
+
+.secret-box h1 {
+    color: red;
+}
+
+.secret-input {
+    width: 90%;
+    padding: 13px;
+    margin: 15px 0;
+    background: #250000;
+    color: white;
+    border: 1px solid red;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.secret-button {
+    background: #a00000;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.evil-site {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100001;
+    overflow-y: auto;
+    background: radial-gradient(circle at top, #450000, #080000 70%);
+    color: white;
+    text-align: center;
+    padding: 30px 18px;
+}
+
+.evil-site h1 {
+    color: #ff1717;
+    text-shadow: 0 0 15px red;
+}
+
+.evil-card {
+    background: #150000;
+    border: 1px solid #900000;
+    border-radius: 15px;
+    padding: 18px;
+    margin: 15px 0;
+    box-shadow: 0 0 15px #400000;
+}
+
+.evil-card h2 {
+    color: #ff3030;
+}
+
+.evil-exit {
+    background: #a00000;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    margin: 25px;
+}
+.evil-eyes {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin: 25px auto;
+    animation: eyesMove 3s infinite alternate ease-in-out;
+}
+
+.evil-eye {
+    width: 45px;
+    height: 25px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 15px red;
+    overflow: hidden;
+}
+
+.evil-eye::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background: red;
+    border-radius: 50%;
+    top: 6px;
+    left: 16px;
+    box-shadow: 0 0 12px red;
+}
+
+@keyframes eyesMove {
+    from { transform: translateX(-12px); }
+    to { transform: translateX(12px); }
+}
+    .evil-eye {
+    animation: evilBlink 4s infinite;
+}
+
+@keyframes evilBlink {
+    0%, 45%, 55%, 100% {
+        transform: scaleY(1);
+        box-shadow: 0 0 15px red;
+    }
+
+    50% {
+        transform: scaleY(0.08);
+        box-shadow: 0 0 30px red;
+    }
+}
+    .evil-eye::after {
+    animation: pupilMove 3s infinite alternate ease-in-out;
+}
+
+@keyframes pupilMove {
+    0% { left: 5px; }
+    100% { left: 27px; }
+}
+    .illuminati-symbol {
+    width: 110px;
+    height: 110px;
+    margin: 25px auto;
+    position: relative;
+    animation: eyeGlow 3s infinite alternate;
+}
+
+.illuminati-symbol svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 12px #d4af37);
+}
+
+.heptagram {
+    font-size: 100px;
+    color: #a00000;
+    text-align: center;
+    margin: 30px auto;
+    text-shadow: 0 0 15px red, 0 0 35px darkred;
+    animation: starRotate 15s linear infinite;
+}
+
+@keyframes eyeGlow {
+    from { filter: drop-shadow(0 0 5px #d4af37); }
+    to { filter: drop-shadow(0 0 25px red); }
+}
+
+@keyframes starRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+    }
+</style>
+
+<!-- دکمه ورود -->
+
+<button class="secret-entry" onclick="showMysteryVault()">
+🔐 بخش مخفی
+</button>
+
+<!-- صفحه رمز -->
+
+<div class="secret-screen" id="mysteryVaultLogin">
+
+    <div class="secret-box">
+
+        <h1>☠️ ورود ممنوع ☠️</h1>
+
+        <p>این بخش برای همه نیست...</p>
+
+        <p>رمز ورود را وارد کن</p>
+
+        <input
+            class="secret-input"
+            id="mysteryVaultPassword"
+            type="password"
+            placeholder="رمز ورود"
+        >
+
+        <br>
+
+        <button class="secret-button" onclick="enterMysteryVault()">
+            ورود
+        </button>
+
+        <p onclick="closeMysteryVault()" style="cursor:pointer;color:#aaa;">
+            بازگشت
+        </p>
+
+    </div>
+
+</div>
+
+<!-- سایت شیطانی -->
+
+<div class="evil-site" id="mysteryEvilSite">
+  <div class="illuminati-symbol">
+    <svg viewBox="0 0 200 200">
+        <path d="M100 15 L15 175 L185 175 Z"
+        fill="none" stroke="#d4af37" stroke-width="5"/>
+        <path d="M55 105 Q100 55 145 105 Q100 155 55 105"
+        fill="none" stroke="#d4af37" stroke-width="4"/>
+        <circle cx="100" cy="105" r="17"
+        fill="#d4af37"/>
+        <circle cx="100" cy="105" r="7"
+        fill="#850000"/>
+    </svg>
+  </div>
+<div class="evil-eyes">
+    <div class="evil-eye"></div>
+    <div class="evil-eye"></div>
+</div>
+    <h1>☠️ WELCOME TO THE DARK SIDE ☠️</h1>
+
+    <p>تو وارد دنیای تاریک جعبه‌های شانسی شدی...</p>
+
+    <div class="evil-card">
+        <h2>🎃 جعبه ترسناک</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۴۰۰ هزار تا ۲۰ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>👻 ترسناک داستانی</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۶۰۰ هزار تا ۲۰ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>🍔 خوراکی</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۳۰۰ هزار تا ۱۰ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>🎲 سرگرمی</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۳۰۰ هزار تا ۵ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>🎌 انیمه و انیمیشن</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۴۰۰ هزار تا ۲۰ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>🎮 جعبه بازی‌ها</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۳۰۰ هزار تا ۱۰ میلیون تومان</p>
+    </div>
+
+    <div class="evil-card">
+        <h2>🌈 جعبه برچسب</h2>
+        <p>محتویات کاملاً سوپرایزی</p>
+        <p>۲۰۰ هزار تا ۷ میلیون تومان</p>
+    </div>
+
+    <button class="evil-exit" onclick="exitMysteryVault()">
+        خروج از دنیای تاریک
+    </button>
+
+</div>
+
+<script>
+
+function showMysteryVault() {
+    document.getElementById("mysteryVaultLogin").style.display = "flex";
+}
+
+function closeMysteryVault() {
+    document.getElementById("mysteryVaultLogin").style.display = "none";
+}
+
+function enterMysteryVault() {
+
+    var password = document.getElementById("mysteryVaultPassword").value;
+
+    if (password === "1234") {
+
+<div class="illuminati-symbol">
+    <svg viewBox="0 0 200 200">
+        <path d="M100 15 L15 175 L185 175 Z"
+        fill="none" stroke="#d4af37" stroke-width="5"/>
+        <path d="M55 105 Q100 55 145 105 Q100 155 55 105"
+        fill="none" stroke="#d4af37" stroke-width="4"/>
+        <circle cx="100" cy="105" r="17"
+        fill="#d4af37"/>
+        <circle cx="100" cy="105" r="7"
+        fill="#850000"/>
+    </svg>
+</div>
