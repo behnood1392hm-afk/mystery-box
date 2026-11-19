@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at top, #29200c 0%, #111111 45%, #080808 100%);
+    color: #ffffff;
+    font-family: sans-serif;
+    text-align: center;
+    direction: rtl;
+    margin: 0;
+    padding: 35px 15px;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #f5d778;
+    font-size: 30px;
+    text-shadow: 0 0 15px #d4af3766;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #f5d778;
+}
+
+p {
+    color: #dddddd;
+    font-size: 16px;
+    line-height: 2;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+    margin-top: 35px;
+}
+
+.card {
+    background: linear-gradient(145deg, #252525, #151515);
+    border: 1px solid #b8963e;
+    border-radius: 18px;
+    padding: 20px 10px;
+    color: white;
+    box-shadow: 0 5px 18px #00000099;
+    transition: 0.3s ease;
+}
+
+.card:active {
+    transform: scale(0.96);
+    box-shadow: 0 0 18px #d4af3766;
+}
+
+.card .emoji {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.card h2 {
+    color: #f5d778;
+    font-size: 17px;
+}
+
+.card a {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffe69a, #d4af37, #a77b19);
+    color: #17120a;
+    padding: 11px 16px;
+    margin-top: 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 3px 12px #d4af3744;
+    transition: 0.3s;
+}
+
+.card a:active {
+    transform: scale(0.94);
+}
+
+section {
+    margin-top: 35px;
+    padding: 25px 15px;
+    background: linear-gradient(145deg, #252525, #141414);
+    border: 1px solid #d4af37;
+    border-radius: 20px;
+    box-shadow: 0 5px 25px #00000099;
+    scroll-margin-top: 20px;
+}
+
+section h2 {
+    color: #f5d778;
+}
+
+section p {
+    color: #eeeeee;
+}
+
+.back-button {
+    background: linear-gradient(135deg, #ffe69a, #d4af37);
+    color: #17120a;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 22px;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+    
+/* افکت ذرات نور طلایی */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    background-image:
+        radial-gradient(circle, #ffe69a 1px, transparent 2px),
+        radial-gradient(circle, #d4af37 1.5px, transparent 2.5px),
+        radial-gradient(circle, #fff0b3 1px, transparent 2px);
+
+    background-size:
+        90px 120px,
+        150px 180px,
+        210px 230px;
+
+    background-position:
+        0 0,
+        40px 60px,
+        100px 30px;
+
+    animation: goldenDust 12s linear infinite;
+    opacity: 0.55;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes goldenDust {
+    from {
+        background-position:
+            0 0,
+            40px 60px,
+            100px 30px;
+    }
+
+    to {
+        background-position:
+            0 500px,
+            40px 660px,
+            100px 730px;
+    }
+}
+/* افکت باز شدن جعبه */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.opening {
+    animation: boxShake 0.7s ease;
+    box-shadow: 0 0 30px #d4af37;
+}
+
+.card.opening .emoji {
+    animation: boxGlow 0.7s ease;
+}
+
+@keyframes boxShake {
+    0%, 100% { transform: translateX(0) scale(1); }
+    20% { transform: translateX(-6px) rotate(-3deg); }
+    40% { transform: translateX(6px) rotate(3deg); }
+    60% { transform: translateX(-4px) rotate(-2deg); }
+    80% { transform: translateX(4px) rotate(2deg); }
+}
+
+@keyframes boxGlow {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.5); filter: brightness(2); }
+    100% { transform: scale(1); filter: brightness(1); }
+}
+  
+      .card.opening::after {
+    content: "✨";
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 55px;
+    opacity: 0;
+    pointer-events: none;
+    animation: goldenBurst 0.7s ease forwards;
+}
+
+@keyframes goldenBurst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.8);
+        filter: drop-shadow(0 0 15px gold);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+    }
+}            .card.opening::after {
+    content: "✨";
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 55px;
+    opacity: 0;
+    pointer-events: none;
+    animation: goldenBurst 0.7s ease forwards;
+}
+
+@keyframes goldenBurst {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.8);
+        filter: drop-shadow(0 0 15px gold);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+ </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه من</title> 
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111111;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    direction: rtl;
+    margin: 0;
+    padding: 30px 15px;
+}
+
+h1 {
+    color: #d4af37;
+    font-size: 28px;
+    margin-top: 50px;
+}
+
+p {
+    color: #dddddd;
+    font-size: 18px;
+    line-height: 2;
+}
+
+/* طراحی کارت محصولات */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.card {
+    background: #1c1c1c;
+    border: 1px solid #b8963e;
+    border-radius: 15px;
+    padding: 15px 8px;
+    color: white;
+}
+
+.card .emoji {
+    font-size: 45px;
+}
+
+.card h2 {
+    color: #d4af37;
+    font-size: 17px;
+}
+
+.card p {
+    font-size: 14px;
+}
+
+.card a {
+    display: inline-block;
+    background: #d4af37;
+    color: black;
+    padding: 9px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+</head>
+<body>
+<div class="spider-web">🕸️</div>
+<div class="spider">🕷️</div>
+
+    <
+<h1>جعبه شانسی Mystery Box</h1>
+
+<p>دنیایی از هیجان، شگفتی و اتفاقات غیرمنتظره!</p>
+
+<div class="products">
+
+    <div class="card">
+        <div class="emoji">🎃</div>
+        <h2>جعبه ترسناک</h2>
+        <p>پر از هیجان و شگفتی!</p>
+       <a href="#" onclick="showDetails('horror'); return false;">مشاهده جزئیات</a>
+    </div>
+
+    <div class="card">
+        <div class="emoji">👻</div>
+        <h2>ترسناک داستانی</h2>
+        <p>داستانی مرموز و هیجان‌انگیز</p>
+      <a href="#" onclick="showDetails('story')">مشاهده جزئیات</a> 
+    </div>
+
+    <div class="card">
+        <div class="emoji">🍔</div>
+        <h2>جعبه خوراکی</h2>
+        <p>پر از خوراکی‌های خوشمزه</p>
+        <a href="#" onclick="showDetails('food')">مشاهده جزئیات</a>
+    </div>
+
+    <div class="card">
+        <div class="emoji">😂</div>
+        <h2>جعبه سرگرمی</h2>
+        <p>برای لحظات شاد و جذاب</p>
+        <a href="#" onclick="showDetails('fun')">مشاهده جزئیات</a>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🎌</div>
+        <h2>انیمه و انیمیشن</h2>
+        <p>دنیای شخصیت‌های محبوب</p>
+        <a href="#" onclick="showDetails('anime')">مشاهده جزئیات</a>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🎮</div>
+        <h2>جعبه بازی‌ها</h2>
+        <p>ویژه عاشقان بازی</p>
+        <a href="#" onclick="showDetails('games')">مشاهده جزئیات</a>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🌈</div>
+        <h2>جعبه برچسب</h2>
+        <p>پر از برچسب‌های جذاب</p>
+        <a href="#" onclick="showDetails('stickers')">مشاهده جزئیات</a>
+    </div>
+
+</div>
+  <div id="details" style="display: none;">
+  <section id="horror" class="card">
+    <h2>🎃 جعبه ترسناک</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۴۰۰ هزار تا ۲۰ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+  </section><section id="story" class="card">
+    <h2>👻 ترسناک داستانی</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۶۰۰ هزار تا ۲۰ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+  </section><section id="food" class="card">
+    <h2>🍔 جعبه خوراکی</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۳۰۰ هزار تا ۱۰ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+  </section><section id="fun" class="card">
+    <h2>😂 جعبه سرگرمی</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۳۰۰ هزار تا ۵ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+</section><section id="anime" class="card">
+    <h2>🎌 انیمه و انیمیشن</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۴۰۰ هزار تا ۲۰ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+</section><section id="games" class="card">
+    <h2>🎮 جعبه بازی‌ها</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۳۰۰ هزار تا ۱۰ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+</section><section id="stickers" class="card">
+    <h2>🌈 جعبه برچسب</h2>
+    <p>محتویات کاملاً سوپرایزی! 🎁</p>
+    <p>قیمت: ۲۰۰ هزار تا ۷ میلیون تومان</p>
+    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
+</section>
+  </div>
+  <script>
+function showDetails(id) {
+    }function showDetails(id) {
+    const products = document.querySelector('.products');
+    const details = document.getElementById('details');
+    const selected = document.getElementById(id);
+
+    if (!selected) return;
+
+    const cards = products.querySelectorAll('.card');
+    let clickedCard = null;
+
+    cards.forEach(card => {
+        const link = card.querySelector('a');
+        if (link && link.getAttribute('onclick')?.includes(id)) {
+            clickedCard = card;
+        }
+    });
+
+    if (!clickedCard) return;
+
+    clickedCard.classList.remove('opening');
+    void clickedCard.offsetWidth;
+    clickedCard.classList.add('opening');
+
+    setTimeout(() => {
+        clickedCard.classList.remove('opening');
+
+        details.querySelectorAll('section').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        products.style.display = 'none';
+        details.style.display = 'block';
+        selected.style.display = 'block';
+
+        let back = selected.querySelector('.back-button');
+
+        if (!back) {
+            back = document.createElement('button');
+            back.className = 'back-button';
+            back.textContent = 'بازگشت به جعبه‌ها';
+            back.onclick = goBack;
+            selected.appendChild(back);
+        }
+
+        window.scrollTo(0, 0);
+    }, 700);
+}
+function goBack() {
+    document.getElementById('details').style.display = 'none';
+    document.querySelector('.products').style.display = 'grid';
+    window.scrollTo(0, 0);
+}
+  </script>
+  <a href="https://ble.ir/Behnood1392"
+   target="_blank"
+   style="display:block; text-align:center; background:#d4af37; color:#000; padding:15px; margin:25px auto; border-radius:12px; text-decoration:none; font-weight:bold;">
+   ارتباط با ما در بله
+  </a>
+</body>
+</html>
