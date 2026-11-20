@@ -1,917 +1,2073 @@
-
-<DOCTYPE! html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <style>
-* {
-    box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>جعبه شانسی | Mystery Box</title>
+
+<style>
+
+/* =========================
+   تنظیمات اصلی
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
+body{
     background:
-        radial-gradient(ellipse at top, #29200c 0%, #111111 45%, #080808 100%);
-    color: #ffffff;
-    font-family: sans-serif;
-    text-align: center;
-    direction: rtl;
-    margin: 0;
-    padding: 35px 15px;
-    min-height: 100vh;
+        radial-gradient(circle at top, #222 0%, #111 38%, #090909 100%);
+    color:#fff;
+    font-family:Tahoma, Arial, sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-h1 {
-    color: #f5d778;
-    font-size: 30px;
-    text-shadow: 0 0 15px #d4af3766;
-    margin-bottom: 15px;
+/* نور طلایی پس زمینه */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
+    background:radial-gradient(
+        circle,
+        rgba(212,175,55,.12),
+        transparent 70%
+    );
+    pointer-events:none;
+    z-index:-1;
 }
 
-h2 {
-    color: #f5d778;
+/* =========================
+   صفحه اصلی
+========================= */
+
+.main-page{
+    min-height:100vh;
+    padding:35px 15px 40px;
 }
 
-p {
-    color: #dddddd;
-    font-size: 16px;
-    line-height: 2;
+.logo{
+    width:100px;
+    height:100px;
+    margin:0 auto 18px;
+    border-radius:28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:52px;
+
+    background:
+        linear-gradient(145deg,#1d1d1d,#0b0b0b);
+
+    border:1px solid #c9a63a;
+
+    box-shadow:
+        0 0 15px rgba(212,175,55,.18),
+        inset 0 0 20px rgba(255,255,255,.03);
 }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 17px;
-    margin-top: 35px;
+h1{
+    text-align:center;
+    color:#d4af37;
+    font-size:30px;
+    margin-bottom:10px;
+
+    text-shadow:
+        0 0 15px rgba(212,175,55,.3);
 }
 
-.card {
-    background: linear-gradient(145deg, #252525, #151515);
-    border: 1px solid #b8963e;
-    border-radius: 18px;
-    padding: 20px 10px;
-    color: white;
-    box-shadow: 0 5px 18px #00000099;
-    transition: 0.3s ease;
+.subtitle{
+    text-align:center;
+    color:#d0d0d0;
+    font-size:15px;
+    line-height:2;
+    margin-bottom:35px;
 }
 
-.card:active {
-    transform: scale(0.96);
-    box-shadow: 0 0 18px #d4af3766;
+/* خط طلایی */
+
+.gold-line{
+    width:100px;
+    height:2px;
+    background:#d4af37;
+    margin:0 auto 30px;
+    box-shadow:0 0 12px #d4af37;
 }
 
-.card .emoji {
-    font-size: 48px;
-    margin-bottom: 8px;
+/* =========================
+   کارت ها
+========================= */
+
+.products{
+    max-width:900px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
 }
 
-.card h2 {
-    color: #f5d778;
-    font-size: 17px;
+.card{
+    position:relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,35,35,.98),
+            rgba(16,16,16,.98)
+        );
+
+    border:1px solid rgba(212,175,55,.5);
+    border-radius:20px;
+
+    padding:20px 10px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.45),
+        inset 0 0 15px rgba(255,255,255,.02);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+
+    overflow:hidden;
 }
 
-.card a {
-    display: inline-block;
-    background: linear-gradient(135deg, #ffe69a, #d4af37, #a77b19);
-    color: #17120a;
-    padding: 11px 16px;
-    margin-top: 8px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 3px 12px #d4af3744;
-    transition: 0.3s;
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:100%;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d4af37,
+            transparent
+        );
+
+    opacity:.8;
 }
 
-.card a:active {
-    transform: scale(0.94);
+.card:hover{
+    transform:translateY(-5px);
+
+    border-color:#d4af37;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.6),
+        0 0 20px rgba(212,175,55,.12);
 }
 
-section {
-    margin-top: 35px;
-    padding: 25px 15px;
-    background: linear-gradient(145deg, #252525, #141414);
-    border: 1px solid #d4af37;
-    border-radius: 20px;
-    box-shadow: 0 5px 25px #00000099;
-    scroll-margin-top: 20px;
+.box-icon{
+    width:85px;
+    height:85px;
+
+    margin:0 auto 12px;
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:44px;
+
+    background:#111;
+
+    border:1px solid #806b2d;
+
+    box-shadow:
+        inset 0 0 20px rgba(212,175,55,.05),
+        0 5px 15px rgba(0,0,0,.5);
 }
 
-section h2 {
-    color: #f5d778;
+.card h2{
+    color:#d4af37;
+    font-size:17px;
+    margin-bottom:8px;
 }
 
-section p {
-    color: #eeeeee;
+.card p{
+    color:#aaa;
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:15px;
 }
 
-.back-button {
-    background: linear-gradient(135deg, #ffe69a, #d4af37);
-    color: #17120a;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 22px;
-    margin-top: 20px;
-    font-size: 15px;
-    font-weight: bold;
+.details-btn{
+    border:none;
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0d36a,
+            #b38a20
+        );
+
+    color:#111;
+
+    padding:10px 17px;
+
+    border-radius:10px;
+
+    font-size:13px;
+    font-weight:bold;
+
+    box-shadow:
+        0 4px 12px rgba(212,175,55,.2);
+
+    transition:.25s;
 }
 
-button:active {
-    transform: scale(0.95);
-}
-    
-/* افکت ذرات نور طلایی */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-
-    background-image:
-        radial-gradient(circle, #ffe69a 1px, transparent 2px),
-        radial-gradient(circle, #d4af37 1.5px, transparent 2.5px),
-        radial-gradient(circle, #fff0b3 1px, transparent 2px);
-
-    background-size:
-        90px 120px,
-        150px 180px,
-        210px 230px;
-
-    background-position:
-        0 0,
-        40px 60px,
-        100px 30px;
-
-    animation: goldenDust 12s linear infinite;
-    opacity: 0.55;
+.details-btn:hover{
+    transform:scale(1.04);
+    box-shadow:
+        0 0 18px rgba(212,175,55,.35);
 }
 
-body > * {
-    position: relative;
-    z-index: 1;
+/* =========================
+   صفحه جزئیات
+========================= */
+
+.details-page{
+    display:none;
+
+    min-height:100vh;
+
+    padding:30px 18px 50px;
+
+    animation:pageIn .5s ease;
 }
 
-@keyframes goldenDust {
-    from {
-        background-position:
-            0 0,
-            40px 60px,
-            100px 30px;
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
     }
 
-    to {
-        background-position:
-            0 500px,
-            40px 660px,
-            100px 730px;
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
-/* افکت باز شدن جعبه */
-.card {
-    position: relative;
-    overflow: hidden;
+
+.detail-box{
+    max-width:700px;
+    margin:0 auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1b1b,
+            #0d0d0d
+        );
+
+    border:1px solid #b8963e;
+
+    border-radius:25px;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.7),
+        0 0 25px rgba(212,175,55,.08);
 }
 
-.card.opening {
-    animation: boxShake 0.7s ease;
-    box-shadow: 0 0 30px #d4af37;
+.open-box-animation{
+    width:130px;
+    height:130px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:75px;
+
+    animation:
+        boxOpen 1.2s ease,
+        floating 3s ease-in-out infinite;
 }
 
-.card.opening .emoji {
-    animation: boxGlow 0.7s ease;
-}
-
-@keyframes boxShake {
-    0%, 100% { transform: translateX(0) scale(1); }
-    20% { transform: translateX(-6px) rotate(-3deg); }
-    40% { transform: translateX(6px) rotate(3deg); }
-    60% { transform: translateX(-4px) rotate(-2deg); }
-    80% { transform: translateX(4px) rotate(2deg); }
-}
-
-@keyframes boxGlow {
-    0% { transform: scale(1); filter: brightness(1); }
-    50% { transform: scale(1.5); filter: brightness(2); }
-    100% { transform: scale(1); filter: brightness(1); }
-}
-  
-      .card.opening::after {
-    content: "✨";
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 55px;
-    opacity: 0;
-    pointer-events: none;
-    animation: goldenBurst 0.7s ease forwards;
-}
-
-@keyframes goldenBurst {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.8);
-        filter: drop-shadow(0 0 15px gold);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2.5);
-    }
-}            .card.opening::after {
-    content: "✨";
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 55px;
-    opacity: 0;
-    pointer-events: none;
-    animation: goldenBurst 0.7s ease forwards;
-}
-
-@keyframes goldenBurst {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.8);
-        filter: drop-shadow(0 0 15px gold);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2.5);
-      /* بنر اصلی */
-.banner {
-    width: 100%;
-    max-width: 900px;
-    height: 190px;
-    margin: 0 auto 30px;
-    border: 2px solid #d4af37;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #080808, #49380d, #080808);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px #d4af3744;
-}
-
-.banner h2 {
-    color: #f5d778;
-    font-size: 30px;
-}
-
-.banner p {
-    color: white;
-    font-size: 15px;
-}
- </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه من</title> 
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #111111;
-    color: white;
-    font-family: sans-serif;
-    text-align: center;
-    direction: rtl;
-    margin: 0;
-    padding: 30px 15px;
-}
-
-h1 {
-    color: #d4af37;
-    font-size: 28px;
-    margin-top: 50px;
-}
-
-p {
-    color: #dddddd;
-    font-size: 18px;
-    line-height: 2;
-}
-
-/* طراحی کارت محصولات */
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 35px;
-}
-
-.card {
-    background: #1c1c1c;
-    border: 1px solid #b8963e;
-    border-radius: 15px;
-    padding: 15px 8px;
-    color: white;
-}
-
-.card .emoji {
-    font-size: 45px;
-}
-
-.card h2 {
-    color: #d4af37;
-    font-size: 17px;
-}
-
-.card p {
-    font-size: 14px;
-}
-
-.card a {
-    display: inline-block;
-    background: #d4af37;
-    color: black;
-    padding: 9px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-
-</head>
-<body>
-<div class="spider-web">🕸️</div>
-<div class="spider">🕷️</div>
-
-    <
-<h1>جعبه شانسی Mystery Box</h1>
-
-<p>دنیایی از هیجان، شگفتی و اتفاقات غیرمنتظره!</p>
-
-<div class="products">
-
-    <div class="card">
-        <div class="emoji">🎃</div>
-        <h2>جعبه ترسناک</h2>
-        <p>پر از هیجان و شگفتی!</p>
-       <a href="#" onclick="showDetails('horror'); return false;">مشاهده جزئیات</a>
-    </div>
-
-    <div class="card">
-        <div class="emoji">👻</div>
-        <h2>ترسناک داستانی</h2>
-        <p>داستانی مرموز و هیجان‌انگیز</p>
-      <a href="#" onclick="showDetails('story')">مشاهده جزئیات</a> 
-    </div>
-
-    <div class="card">
-        <div class="emoji">🍔</div>
-        <h2>جعبه خوراکی</h2>
-        <p>پر از خوراکی‌های خوشمزه</p>
-        <a href="#" onclick="showDetails('food')">مشاهده جزئیات</a>
-    </div>
-
-    <div class="card">
-        <div class="emoji">😂</div>
-        <h2>جعبه سرگرمی</h2>
-        <p>برای لحظات شاد و جذاب</p>
-        <a href="#" onclick="showDetails('fun')">مشاهده جزئیات</a>
-    </div>
-
-    <div class="card">
-        <div class="emoji">🎌</div>
-        <h2>انیمه و انیمیشن</h2>
-        <p>دنیای شخصیت‌های محبوب</p>
-        <a href="#" onclick="showDetails('anime')">مشاهده جزئیات</a>
-    </div>
-
-    <div class="card">
-        <div class="emoji">🎮</div>
-        <h2>جعبه بازی‌ها</h2>
-        <p>ویژه عاشقان بازی</p>
-        <a href="#" onclick="showDetails('games')">مشاهده جزئیات</a>
-    </div>
-
-    <div class="card">
-        <div class="emoji">🌈</div>
-        <h2>جعبه برچسب</h2>
-        <p>پر از برچسب‌های جذاب</p>
-        <a href="#" onclick="showDetails('stickers')">مشاهده جزئیات</a>
-    </div>
-
-</div>
-  <div id="details" style="display: none;">
-  <section id="horror" class="card">
-    <h2>🎃 جعبه ترسناک</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۴۰۰ هزار تا ۲۰ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-  </section><section id="story" class="card">
-    <h2>👻 ترسناک داستانی</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۶۰۰ هزار تا ۲۰ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-  </section><section id="food" class="card">
-    <h2>🍔 جعبه خوراکی</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۳۰۰ هزار تا ۱۰ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-  </section><section id="fun" class="card">
-    <h2>😂 جعبه سرگرمی</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۳۰۰ هزار تا ۵ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-</section><section id="anime" class="card">
-    <h2>🎌 انیمه و انیمیشن</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۴۰۰ هزار تا ۲۰ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-</section><section id="games" class="card">
-    <h2>🎮 جعبه بازی‌ها</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۳۰۰ هزار تا ۱۰ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-</section><section id="stickers" class="card">
-    <h2>🌈 جعبه برچسب</h2>
-    <p>محتویات کاملاً سوپرایزی! 🎁</p>
-    <p>قیمت: ۲۰۰ هزار تا ۷ میلیون تومان</p>
-    <p>برای سفارش و اطلاعات بیشتر پیام بده.</p>
-</section>
-  </div>
-  <script>
-function showDetails(id) {
-    }function showDetails(id) {
-    const products = document.querySelector('.products');
-    const details = document.getElementById('details');
-    const selected = document.getElementById(id);
-
-    if (!selected) return;
-
-    const cards = products.querySelectorAll('.card');
-    let clickedCard = null;
-
-    cards.forEach(card => {
-        const link = card.querySelector('a');
-        if (link && link.getAttribute('onclick')?.includes(id)) {
-            clickedCard = card;
-        }
-    });
-
-    if (!clickedCard) return;
-
-    clickedCard.classList.remove('opening');
-    void clickedCard.offsetWidth;
-    clickedCard.classList.add('opening');
-
-    setTimeout(() => {
-        clickedCard.classList.remove('opening');
-
-        details.querySelectorAll('section').forEach(section => {
-            section.style.display = 'none';
-        });
-
-        products.style.display = 'none';
-        details.style.display = 'block';
-        selected.style.display = 'block';
-
-        let back = selected.querySelector('.back-button');
-
-        if (!back) {
-            back = document.createElement('button');
-            back.className = 'back-button';
-            back.textContent = 'بازگشت به جعبه‌ها';
-            back.onclick = goBack;
-            selected.appendChild(back);
-        }
-
-        window.scrollTo(0, 0);
-    }, 700);
-}
-function goBack() {
-    document.getElementById('details').style.display = 'none';
-    document.querySelector('.products').style.display = 'grid';
-    window.scrollTo(0, 0);
-}function showMysteryVault() {
-    document.getElementById("mysteryVaultLock").style.display = "flex";
-}
-
-function closeMysteryVault() {
-    document.getElementById("mysteryVaultLock").style.display = "none";
-}
-    function showMysteryVault() {
-    document.getElementById("mysteryVaultLock").style.display = "flex";
-}
-
-function closeMysteryVault() {
-    document.getElementById("mysteryVaultLock").style.display = "none";
-}
-
-function checkMysteryPassword() {
-    const password = document.getElementById("mysteryPassword").value;
-
-    if (password === "666") {
-        document.getElementById("mysteryVaultLock").style.display = "none";
-        document.getElementById("mysteryEvilSite").style.display = "block";
-    } else {
-        alert("رمز اشتباه است!");
-    }
-}
-  </script>
-  <a href="https://ble.ir/Behnood1392"
-   target="_blank"
-   style="display:block; text-align:center; background:#d4af37; color:#000; padding:15px; margin:25px auto; border-radius:12px; text-decoration:none; font-weight:bold;">
-   ارتباط با ما در بله
-  </a>
-  <style>
-
-/* ظاهر بخش مخفی */
-
-.secret-entry {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    z-index: 99999;
-    background: #850000;
-    color: white;
-    border: 1px solid red;
-    padding: 12px 18px;
-    border-radius: 12px;
-    cursor: pointer;
-}
-.secret-screen {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100000;
-    background: #080000;
-    justify-content: center;
-    align-items: center;
-}
-
-.secret-box {
-    background: #160000;
-    border: 2px solid #850000;
-    border-radius: 18px;
-    padding: 30px;
-    width: 85%;
-    max-width: 350px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 0 30px red;
-}
-
-.secret-box h1 {
-    color: #ff0000;
-}
-
-.secret-box input {
-    width: 90%;
-    padding: 12px;
-    margin: 15px 0;
-    background: #080000;
-    color: white;
-    border: 1px solid red;
-    border-radius: 8px;
-}
-
-.secret-box button {
-    background: #850000;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    }.secret-box .close-secret {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: transparent;
-    color: #ff0000;
-    border: 1px solid red;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    cursor: pointer;
-}
-.secret-screen {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100000;
-    background: radial-gradient(circle, #500000, #000000);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.secret-box {
-    width: 100%;
-    max-width: 350px;
-    background: #100000;
-    border: 2px solid #a00000;
-    border-radius: 18px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 0 30px red;
-    color: white;
-}
-
-.secret-box h1 {
-    color: red;
-}
-
-.secret-input {
-    width: 90%;
-    padding: 13px;
-    margin: 15px 0;
-    background: #250000;
-    color: white;
-    border: 1px solid red;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.secret-button {
-    background: #a00000;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.evil-site {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 100001;
-    overflow-y: auto;
-    background: radial-gradient(circle at top, #450000, #080000 70%);
-    color: white;
-    text-align: center;
-    padding: 30px 18px;
-}
-
-.evil-site h1 {
-    color: #ff1717;
-    text-shadow: 0 0 15px red;
-}
-
-.evil-card {
-    background: #150000;
-    border: 1px solid #900000;
-    border-radius: 15px;
-    padding: 18px;
-    margin: 15px 0;
-    box-shadow: 0 0 15px #400000;
-}
-
-.evil-card h2 {
-    color: #ff3030;
-}
-
-.evil-exit {
-    background: #a00000;
-    color: white;
-    border: none;
-    padding: 14px 25px;
-    border-radius: 10px;
-    margin: 25px;
-}
-.evil-eyes {
-    display: flex;
-    justify-content: center;
-    gap: 35px;
-    margin: 25px auto;
-    animation: eyesMove 3s infinite alternate ease-in-out;
-}
-
-.evil-eye {
-    width: 45px;
-    height: 25px;
-    background: #fff;
-    border-radius: 50%;
-    position: relative;
-    box-shadow: 0 0 15px red;
-    overflow: hidden;
-}
-
-.evil-eye::after {
-    content: "";
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    background: red;
-    border-radius: 50%;
-    top: 6px;
-    left: 16px;
-    box-shadow: 0 0 12px red;
-}
-
-@keyframes eyesMove {
-    from { transform: translateX(-12px); }
-    to { transform: translateX(12px); }
-}
-    .evil-eye {
-    animation: evilBlink 4s infinite;
-}
-
-@keyframes evilBlink {
-    0%, 45%, 55%, 100% {
-        transform: scaleY(1);
-        box-shadow: 0 0 15px red;
+@keyframes boxOpen{
+
+    0%{
+        transform:scale(.3) rotate(-15deg);
+        opacity:0;
     }
 
-    50% {
-        transform: scaleY(0.08);
-        box-shadow: 0 0 30px red;
+    60%{
+        transform:scale(1.15) rotate(5deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1) rotate(0);
     }
 }
-    .evil-eye::after {
-    animation: pupilMove 3s infinite alternate ease-in-out;
-}
 
-@keyframes pupilMove {
-    0% { left: 5px; }
-    100% { left: 27px; }
-}
-    .illuminati-symbol {
-    width: 110px;
-    height: 110px;
-    margin: 25px auto;
-    position: relative;
-    animation: eyeGlow 3s infinite alternate;
-}
+@keyframes floating{
 
-.illuminati-symbol svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 12px #d4af37);
-}
-
-.heptagram {
-    font-size: 100px;
-    color: #a00000;
-    text-align: center;
-    margin: 30px auto;
-    text-shadow: 0 0 15px red, 0 0 35px darkred;
-    animation: starRotate 15s linear infinite;
-}
-
-@keyframes eyeGlow {
-    from { filter: drop-shadow(0 0 5px #d4af37); }
-    to { filter: drop-shadow(0 0 25px red); }
-}
-
-@keyframes starRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    0%,100%{
+        transform:translateY(0);
     }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.detail-box h2{
+    color:#d4af37;
+    font-size:26px;
+    margin-bottom:15px;
+}
+
+.detail-text{
+    color:#ddd;
+    line-height:2.2;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.price{
+    display:inline-block;
+
+    color:#d4af37;
+
+    border:1px solid #806b2d;
+
+    border-radius:12px;
+
+    padding:10px 16px;
+
+    margin:10px 0 20px;
+
+    background:#111;
+}
+
+.back-btn{
+    display:block;
+
+    margin:25px auto 0;
+
+    border:1px solid #806b2d;
+
+    background:#171717;
+
+    color:#d4af37;
+
+    padding:11px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.25s;
+}
+
+.back-btn:hover{
+    background:#d4af37;
+    color:#111;
+}
+
+/* =========================
+   ارتباط با بله
+========================= */
+
+.contact{
+    max-width:700px;
+    margin:40px auto 20px;
+
+    text-align:center;
+
+    padding:25px 15px;
+
+    border-top:1px solid rgba(212,175,55,.3);
+}
+
+.contact p{
+    color:#aaa;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.bale-btn{
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0d36a,
+            #b38a20
+        );
+
+    color:#111;
+
+    font-weight:bold;
+
+    padding:13px 24px;
+
+    border-radius:13px;
+
+    box-shadow:
+        0 5px 20px rgba(212,175,55,.2);
+
+    transition:.25s;
+}
+
+.bale-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   دکمه مخفی
+========================= */
+
+.secret-trigger{
+    position:fixed;
+
+    bottom:8px;
+    left:8px;
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(212,175,55,.12);
+
+    background:rgba(0,0,0,.2);
+
+    color:rgba(212,175,55,.15);
+
+    cursor:pointer;
+
+    font-size:8px;
+
+    opacity:.25;
+
+    transition:.3s;
+
+    z-index:50;
+}
+
+.secret-trigger:hover{
+    opacity:1;
+    box-shadow:0 0 12px rgba(212,175,55,.3);
+}
+
+/* =========================
+   صفحه رمز
+========================= */
+
+.password-page{
+    display:none;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #300808,
+            #120202 50%,
+            #050000
+        );
+
+    color:#ff2020;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    animation:evilAppear .7s ease;
+}
+
+@keyframes evilAppear{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.password-box{
+    max-width:430px;
+    margin:80px auto;
+
+    padding:35px 22px;
+
+    background:
+        rgba(20,0,0,.9);
+
+    border:1px solid #710909;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 35px rgba(150,0,0,.35);
+}
+
+.password-box h2{
+    color:#ff2020;
+
+    font-size:27px;
+
+    margin-bottom:12px;
+
+    text-shadow:
+        0 0 12px #ff0000;
+}
+
+.password-box p{
+    color:#a33;
+    margin-bottom:20px;
+}
+
+.password-input{
+    width:100%;
+
+    background:#090000;
+
+    border:1px solid #7d1111;
+
+    color:#ff3333;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:20px;
+
+    outline:none;
+
+    direction:ltr;
+}
+
+.password-input:focus{
+    border-color:#ff2222;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.2);
+}
+
+.enter-evil{
+    margin-top:15px;
+
+    background:#7d0b0b;
+
+    color:#fff;
+
+    border:1px solid #c11;
+
+    padding:12px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.25s;
+}
+
+.enter-evil:hover{
+    background:#a00;
+    box-shadow:0 0 20px rgba(255,0,0,.4);
+}
+
+.error{
+    min-height:25px;
+
+    color:#ff5555;
+
+    margin-top:12px;
+
+    font-size:13px;
+}
+
+.password-back{
+    margin-top:25px;
+
+    background:transparent;
+
+    border:none;
+
+    color:#833;
+
+    cursor:pointer;
+}
+
+/* =========================
+   بخش شیطانی
+========================= */
+
+.evil-page{
+    display:none;
+
+    min-height:100vh;
+
+    padding:25px 15px 50px;
+
+    background:
+        radial-gradient(
+            ellipse at top,
+            #350606 0%,
+            #170202 40%,
+            #060000 100%
+        );
+
+    color:#eee;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.evil-page::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        repeating-linear-gradient(
+            110deg,
+            transparent 0px,
+            transparent 90px,
+            rgba(180,0,0,.025) 91px,
+            transparent 92px
+        );
+
+    pointer-events:none;
+}
+
+/* =========================
+   چشم ها
+========================= */
+
+.eyes{
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    margin:5px auto 25px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.eye{
+    width:90px;
+    height:55px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #e7e7e7 0%,
+            #aaa 45%,
+            #333 70%,
+            #100 100%
+        );
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    position:relative;
+
+    border:2px solid #600;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.5);
+
+    animation:blink 4s infinite;
+}
+
+.eye::before{
+    content:"";
+
+    position:absolute;
+
+    width:23px;
+    height:23px;
+
+    background:#000;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+        0 0 0 6px #b00000,
+        0 0 15px #f00;
+}
+
+@keyframes blink{
+
+    0%,44%,48%,100%{
+        transform:scaleY(1);
+    }
+
+    46%{
+        transform:scaleY(.08);
+    }
+}
+
+/* =========================
+   عنوان شیطانی
+========================= */
+
+.evil-title{
+    text-align:center;
+
+    color:#d20b0b;
+
+    font-size:31px;
+
+    margin-bottom:8px;
+
+    text-shadow:
+        0 0 8px #f00,
+        0 0 20px rgba(255,0,0,.5);
+}
+
+.evil-subtitle{
+    text-align:center;
+
+    color:#8d3a3a;
+
+    margin-bottom:25px;
+}
+
+/* =========================
+   مثلث
+========================= */
+
+.illuminati{
+    width:170px;
+    height:150px;
+
+    margin:0 auto 25px;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1;
+}
+
+.triangle{
+    width:0;
+    height:0;
+
+    border-left:85px solid transparent;
+    border-right:85px solid transparent;
+    border-bottom:150px solid transparent;
+
+    position:absolute;
+}
+
+.triangle::before{
+    content:"";
+
+    position:absolute;
+
+    width:116px;
+    height:116px;
+
+    left:-58px;
+    top:25px;
+
+    border-left:2px solid #b00000;
+    border-top:2px solid #b00000;
+
+    transform:
+        rotate(45deg)
+        skew(-10deg,-10deg);
+
+    box-shadow:
+        -3px -3px 12px rgba(255,0,0,.2);
+}
+
+.all-seeing-eye{
+    position:absolute;
+
+    top:48px;
+
+    width:52px;
+    height:32px;
+
+    border:2px solid #d00000;
+
+    border-radius:50%;
+
+    transform:rotate(0deg);
+
+    color:#f00;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    text-shadow:0 0 8px #f00;
+}
+
+/* =========================
+   ستاره ها
+========================= */
+
+.stars{
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+
+    color:#b00000;
+
+    font-size:28px;
+
+    opacity:.55;
+
+    text-shadow:
+        0 0 10px #f00;
+
+    animation:
+        starFloat 4s ease-in-out infinite;
+}
+
+.star:nth-child(1){
+    top:12%;
+    left:8%;
+}
+
+.star:nth-child(2){
+    top:25%;
+    right:8%;
+    animation-delay:1s;
+}
+
+.star:nth-child(3){
+    top:55%;
+    left:5%;
+    animation-delay:2s;
+}
+
+.star:nth-child(4){
+    top:65%;
+    right:6%;
+    animation-delay:.5s;
+}
+
+.star:nth-child(5){
+    top:80%;
+    left:18%;
+    animation-delay:1.5s;
+}
+
+.star:nth-child(6){
+    top:84%;
+    right:18%;
+    animation-delay:2.5s;
+}
+
+@keyframes starFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(-10px)
+            rotate(20deg);
+    }
+}
+
+/* =========================
+   جعبه های شیطانی
+========================= */
+
+.evil-products{
+    max-width:900px;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.evil-card{
+    background:
+        linear-gradient(
+            145deg,
+            #250707,
+            #0e0101
+        );
+
+    border:1px solid #701010;
+
+    border-radius:20px;
+
+    padding:20px 10px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.65),
+        inset 0 0 18px rgba(255,0,0,.035);
+
+    transition:.3s;
+
+    overflow:hidden;
+}
+
+.evil-card:hover{
+    transform:translateY(-5px);
+
+    border-color:#c00;
+
+    box-shadow:
+        0 0 25px rgba(255,0,0,.15);
+}
+
+.evil-icon{
+    width:85px;
+    height:85px;
+
+    margin:0 auto 12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#100000;
+
+    border:1px solid #731111;
+
+    border-radius:22px;
+
+    font-size:44px;
+
+    box-shadow:
+        inset 0 0 20px rgba(255,0,0,.08);
+}
+
+.evil-card h3{
+    color:#d52222;
+
+    font-size:17px;
+
+    margin-bottom:8px;
+}
+
+.evil-card p{
+    color:#925252;
+
+    font-size:12px;
+
+    margin-bottom:15px;
+}
+
+.evil-details-btn{
+    border:1px solid #a00;
+
+    background:#350606;
+
+    color:#e33;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.25s;
+}
+
+.evil-details-btn:hover{
+    background:#a00000;
+
+    color:#fff;
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.35);
+}
+
+.evil-back{
+    display:block;
+
+    margin:30px auto 0;
+
+    background:#170202;
+
+    border:1px solid #711;
+
+    color:#a22;
+
+    padding:11px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    position:relative;
+
+    z-index:3;
+}
+
+/* =========================
+   جزئیات شیطانی
+========================= */
+
+.evil-detail{
+    display:none;
+
+    max-width:700px;
+
+    margin:20px auto;
+
+    background:#160202;
+
+    border:1px solid #721010;
+
+    border-radius:22px;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    animation:evilDetailIn .5s ease;
+
+    position:relative;
+
+    z-index:3;
+}
+
+@keyframes evilDetailIn{
+
+    from{
+        opacity:0;
+        transform:
+            scale(.9)
+            translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.evil-detail .big-icon{
+    font-size:75px;
+
+    margin-bottom:15px;
+
+    animation:evilFloat 2s infinite ease-in-out;
+}
+
+@keyframes evilFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.evil-detail h2{
+    color:#e22;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+
+    text-shadow:
+        0 0 10px rgba(255,0,0,.5);
+}
+
+.evil-detail p{
+    color:#b76b6b;
+
+    line-height:2.2;
+
+    font-size:14px;
+}
+
+.evil-detail .evil-close{
+    margin-top:20px;
+
+    background:#300505;
+
+    border:1px solid #811;
+
+    color:#d33;
+
+    padding:10px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+/* =========================
+   موبایل
+========================= */
+
+@media(max-width:600px){
+
+    .products,
+    .evil-products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .card,
+    .evil-card{
+        padding:15px 7px;
+    }
+
+    .box-icon,
+    .evil-icon{
+        width:70px;
+        height:70px;
+        font-size:36px;
+    }
+
+    .card h2,
+    .evil-card h3{
+        font-size:15px;
+    }
+
+    .details-btn,
+    .evil-details-btn{
+        font-size:11px;
+        padding:9px 11px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+}
+
+@media(max-width:370px){
+
+    .products,
+    .evil-products{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
+</head>
 
-<!-- دکمه ورود -->
+<body>
 
-<button class="secret-entry" onclick="showMysteryVault()">
-🔐 بخش مخفی
-</button>
+<!-- =====================================================
+     صفحه اصلی
+===================================================== -->
 
-<!-- صفحه رمز -->
+<section class="main-page" id="mainPage">
 
-<div class="secret-screen" id="mysteryVaultLogin">
+    <div class="logo">🎁</div>
 
-    <div class="secret-box">
+    <h1>جعبه شانسی</h1>
 
-        <h1>☠️ ورود ممنوع ☠️</h1>
+    <div class="gold-line"></div>
 
-        <p>این بخش برای همه نیست...</p>
+    <p class="subtitle">
+        دنیایی از هیجان، شگفتی و اتفاقات غیرمنتظره!
+        <br>
+        محتویات کاملاً سوپرایزی
+    </p>
 
-        <p>رمز ورود را وارد کن</p>
+
+    <div class="products">
+
+        <!-- 1 -->
+
+        <div class="card">
+
+            <div class="box-icon">🎃</div>
+
+            <h2>جعبه ترسناک</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('horror')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="card">
+
+            <div class="box-icon">👻</div>
+
+            <h2>ترسناک داستانی</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('story')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="card">
+
+            <div class="box-icon">🍔</div>
+
+            <h2>جعبه خوراکی</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('food')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="card">
+
+            <div class="box-icon">🎯</div>
+
+            <h2>جعبه سرگرمی</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('fun')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="card">
+
+            <div class="box-icon">🎌</div>
+
+            <h2>انیمه و انیمیشن</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('anime')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="card">
+
+            <div class="box-icon">🎮</div>
+
+            <h2>جعبه بازی</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('game')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="card">
+
+            <div class="box-icon">🌈</div>
+
+            <h2>جعبه برچسب</h2>
+
+            <p>
+                محتویات کاملاً سوپرایزی
+            </p>
+
+            <button
+                class="details-btn"
+                onclick="showDetail('sticker')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ارتباط -->
+
+    <div class="contact">
+
+        <p>
+            برای مشاوره و خرید در بله
+        </p>
+
+        <a
+            class="bale-btn"
+            href="https://ble.ir/Behnood1392"
+            target="_blank">
+            💬 ارتباط با ما در بله
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     صفحه جزئیات عادی
+===================================================== -->
+
+<section class="details-page" id="detailsPage">
+
+    <div class="detail-box">
+
+        <div
+            class="open-box-animation"
+            id="detailIcon">
+            🎁
+        </div>
+
+        <h2 id="detailTitle">
+            جعبه
+        </h2>
+
+        <p
+            class="detail-text"
+            id="detailText">
+        </p>
+
+        <div
+            class="price"
+            id="detailPrice">
+        </div>
+
+        <p class="detail-text">
+            محتویات این جعبه کاملاً سوپرایزی است.
+            <br>
+            برای مشاوره و خرید پیام بده.
+        </p>
+
+        <a
+            class="bale-btn"
+            href="https://ble.ir/Behnood1392"
+            target="_blank">
+            💬 برای مشاوره و خرید در بله
+        </a>
+
+        <button
+            class="back-btn"
+            onclick="goHome()">
+            ← بازگشت به جعبه‌ها
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     صفحه رمز
+===================================================== -->
+
+<section
+    class="password-page"
+    id="passwordPage">
+
+    <div class="password-box">
+
+        <h2>ورود به بخش مخفی</h2>
+
+        <p>
+            برای ورود، رمز عبور را وارد کنید
+        </p>
 
         <input
-            class="secret-input"
-            id="mysteryVaultPassword"
+            id="passwordInput"
+            class="password-input"
             type="password"
-            placeholder="رمز ورود"
-        >
+            inputmode="numeric"
+            placeholder="رمز عبور">
 
-        <br>
-
-        <button class="secret-button" onclick="enterMysteryVault()">
+        <button
+            class="enter-evil"
+            onclick="checkPassword()">
             ورود
         </button>
 
-        <p onclick="closeMysteryVault()" style="cursor:pointer;color:#aaa;">
+        <div
+            class="error"
+            id="passwordError">
+        </div>
+
+        <button
+            class="password-back"
+            onclick="goHome()">
             بازگشت
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     بخش شیطانی
+===================================================== -->
+
+<section
+    class="evil-page"
+    id="evilPage">
+
+    <!-- ستاره های تزئینی -->
+
+    <div class="stars">
+
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+
+    </div>
+
+
+    <!-- چشم ها -->
+
+    <div class="eyes">
+
+        <div class="eye"></div>
+
+        <div class="eye"></div>
+
+    </div>
+
+
+    <h1 class="evil-title">
+        بخش مخفی
+    </h1>
+
+    <p class="evil-subtitle">
+        وارد قلمرو تاریک جعبه‌ها شدی...
+    </p>
+
+
+    <!-- مثلث -->
+
+    <div class="illuminati">
+
+        <div class="triangle"></div>
+
+        <div class="all-seeing-eye">
+            ●
+        </div>
+
+    </div>
+
+
+    <!-- جعبه های شیطانی -->
+
+    <div
+        class="evil-products"
+        id="evilProducts">
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🎃</div>
+
+            <h3>جعبه ترسناک</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('horror')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">👻</div>
+
+            <h3>ترسناک داستانی</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('story')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🍔</div>
+
+            <h3>جعبه خوراکی</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('food')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🎯</div>
+
+            <h3>جعبه سرگرمی</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('fun')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🎌</div>
+
+            <h3>انیمه و انیمیشن</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('anime')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🎮</div>
+
+            <h3>جعبه بازی</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('game')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+
+        <div class="evil-card">
+
+            <div class="evil-icon">🌈</div>
+
+            <h3>جعبه برچسب</h3>
+
+            <p>محتویات کاملاً سوپرایزی</p>
+
+            <button
+                class="evil-details-btn"
+                onclick="showEvilDetail('sticker')">
+                مشاهده جزئیات
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- جزئیات مخفی -->
+
+    <div
+        class="evil-detail"
+        id="evilDetail">
+
+        <div
+            class="big-icon"
+            id="evilDetailIcon">
+            👁️
+        </div>
+
+        <h2 id="evilDetailTitle">
+            بخش مخفی
+        </h2>
+
+        <p id="evilDetailText">
         </p>
 
+        <button
+            class="evil-close"
+            onclick="closeEvilDetail()">
+            ← بازگشت به جعبه‌ها
+        </button>
+
     </div>
 
-</div>
 
-<!-- سایت شیطانی -->
-
-<div class="evil-site" id="mysteryEvilSite">
-  <div class="illuminati-symbol">
-    <svg viewBox="0 0 200 200">
-        <path d="M100 15 L15 175 L185 175 Z"
-        fill="none" stroke="#d4af37" stroke-width="5"/>
-        <path d="M55 105 Q100 55 145 105 Q100 155 55 105"
-        fill="none" stroke="#d4af37" stroke-width="4"/>
-        <circle cx="100" cy="105" r="17"
-        fill="#d4af37"/>
-        <circle cx="100" cy="105" r="7"
-        fill="#850000"/>
-    </svg>
-  </div>
-<div class="evil-eyes">
-    <div class="evil-eye"></div>
-    <div class="evil-eye"></div>
-</div>
-    <h1>☠️ WELCOME TO THE DARK SIDE ☠️</h1>
-
-    <p>تو وارد دنیای تاریک جعبه‌های شانسی شدی...</p>
-
-    <div class="evil-card">
-        <h2>🎃 جعبه ترسناک</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۴۰۰ هزار تا ۲۰ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>👻 ترسناک داستانی</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۶۰۰ هزار تا ۲۰ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>🍔 خوراکی</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۳۰۰ هزار تا ۱۰ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>🎲 سرگرمی</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۳۰۰ هزار تا ۵ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>🎌 انیمه و انیمیشن</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۴۰۰ هزار تا ۲۰ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>🎮 جعبه بازی‌ها</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۳۰۰ هزار تا ۱۰ میلیون تومان</p>
-    </div>
-
-    <div class="evil-card">
-        <h2>🌈 جعبه برچسب</h2>
-        <p>محتویات کاملاً سوپرایزی</p>
-        <p>۲۰۰ هزار تا ۷ میلیون تومان</p>
-    </div>
-
-    <button class="evil-exit" onclick="exitMysteryVault()">
-        خروج از دنیای تاریک
+    <button
+        class="evil-back"
+        onclick="leaveEvil()">
+        خروج از بخش مخفی
     </button>
 
-</div>
+</section>
+
+
+<!-- =====================================================
+     دکمه مخفی
+===================================================== -->
+
+<button
+    class="secret-trigger"
+    onclick="openPassword()"
+    aria-label="بخش مخفی">
+    ●
+</button>
+
 
 <script>
 
-function showMysteryVault() {
-    document.getElementById("mysteryVaultLogin").style.display = "flex";
+/* =====================================================
+   اطلاعات جعبه ها
+===================================================== */
+
+const boxes = {
+
+    horror:{
+        title:"جعبه ترسناک",
+        icon:"🎃",
+        price:"۴۰۰ هزار تا ۲۰ میلیون تومان",
+        text:"یک جعبه برای کسانی که عاشق هیجان و فضای ترسناک هستند. محتویات کاملاً سوپرایزی بوده و می‌تواند تجربه‌ای متفاوت و غیرمنتظره برایت بسازد."
+    },
+
+    story:{
+        title:"جعبه ترسناک داستانی",
+        icon:"👻",
+        price:"۶۰۰ هزار تا ۲۰ میلیون تومان",
+        text:"ترکیبی از فضای ترسناک و داستان‌های مرموز. این جعبه برای علاقه‌مندان به ماجراهای رازآلود و داستانی طراحی شده است."
+    },
+
+    food:{
+        title:"جعبه خوراکی",
+        icon:"🍔",
+        price:"۳۰۰ هزار تا ۱۰ میلیون تومان",
+        text:"یک جعبه پر از سورپرایزهای خوراکی. محتویات دقیق جعبه از قبل مشخص نیست و هر بار می‌تواند تجربه‌ای متفاوت باشد."
+    },
+
+    fun:{
+        title:"جعبه سرگرمی",
+        icon:"🎯",
+        price:"۳۰۰ هزار تا ۵ میلیون تومان",
+        text:"برای کسانی که دنبال سرگرمی و سورپرایز هستند. داخل این جعبه می‌تواند انواع آیتم‌های سرگرم‌کننده قرار داشته باشد."
+    },
+
+    anime:{
+        title:"جعبه انیمه و انیمیشن",
+        icon:"🎌",
+        price:"۴۰۰ هزار تا ۲۰ میلیون تومان",
+        text:"یک سورپرایز ویژه برای علاقه‌مندان به دنیای انیمه و انیمیشن. محتویات کاملاً سوپرایزی است."
+    },
+
+    game:{
+        title:"جعبه بازی",
+        icon:"🎮",
+        price:"۳۰۰ هزار تا ۱۰ میلیون تومان",
+        text:"یک جعبه مخصوص علاقه‌مندان به بازی و سرگرمی. آیتم‌های داخل جعبه از قبل مشخص نیستند و بخش اصلی هیجان همین سورپرایز بودن آن است."
+    },
+
+    sticker:{
+        title:"جعبه برچسب",
+        icon:"🌈",
+        price:"۲۰۰ هزار تا ۷ میلیون تومان",
+        text:"مجموعه‌ای سوپرایزی از برچسب‌ها و آیتم‌های مرتبط. انتخاب محتویات هر جعبه می‌تواند متفاوت باشد."
+    }
+
+};
+
+
+/* =====================================================
+   نمایش جزئیات عادی
+===================================================== */
+
+function showDetail(type){
+
+    const box = boxes[type];
+
+    document.getElementById("mainPage").style.display="none";
+
+    document.getElementById("passwordPage").style.display="none";
+
+    document.getElementById("evilPage").style.display="none";
+
+    document.getElementById("detailsPage").style.display="block";
+
+    document.getElementById("detailIcon").textContent=box.icon;
+
+    document.getElementById("detailTitle").textContent=box.title;
+
+    document.getElementById("detailText").textContent=box.text;
+
+    document.getElementById("detailPrice").textContent=
+        "بازه قیمت: " + box.price;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
-function closeMysteryVault() {
-    document.getElementById("mysteryVaultLogin").style.display = "none";
+
+/* =====================================================
+   بازگشت خانه
+===================================================== */
+
+function goHome(){
+
+    document.getElementById("mainPage").style.display="block";
+
+    document.getElementById("detailsPage").style.display="none";
+
+    document.getElementById("passwordPage").style.display="none";
+
+    document.getElementById("evilPage").style.display="none";
+
+    document.getElementById("passwordInput").value="";
+
+    document.getElementById("passwordError").textContent="";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
-function enterMysteryVault() {
 
-    var password = document.getElementById("mysteryVaultPassword").value;
+/* =====================================================
+   ورود به صفحه رمز
+===================================================== */
 
-    if (password === "1234") {
+function openPassword(){
 
-<div class="illuminati-symbol">
-    <svg viewBox="0 0 200 200">
-        <path d="M100 15 L15 175 L185 175 Z"
-        fill="none" stroke="#d4af37" stroke-width="5"/>
-        <path d="M55 105 Q100 55 145 105 Q100 155 55 105"
-        fill="none" stroke="#d4af37" stroke-width="4"/>
-        <circle cx="100" cy="105" r="17"
-        fill="#d4af37"/>
-        <circle cx="100" cy="105" r="7"
-        fill="#850000"/>
-    </svg>
-</div>
+    document.getElementById("mainPage").style.display="none";
+
+    document.getElementById("detailsPage").style.display="none";
+
+    document.getElementById("evilPage").style.display="none";
+
+    document.getElementById("passwordPage").style.display="block";
+
+    document.getElementById("passwordInput").value="";
+
+    document.getElementById("passwordError").textContent="";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    setTimeout(function(){
+
+        document
+        .getElementById("passwordInput")
+        .focus();
+
+    },300);
+}
+
+
+/* =====================================================
+   بررسی رمز
+===================================================== */
+
+function checkPassword(){
+
+    const input =
+        document
+        .getElementById("passwordInput")
+        .value
+        .trim();
+
+    /*
+       پشتیبانی از اعداد فارسی و انگلیسی
+    */
+
+    const normalized =
+        input
+        .replace(/۱/g,"1")
+        .replace(/۲/g,"2")
+        .replace(/۳/g,"3")
+        .replace(/۴/g,"4")
+        .replace(/۵/g,"5")
+        .replace(/۶/g,"6")
+        .replace(/۷/g,"7")
+        .replace(/۸/g,"8")
+        .replace(/۹/g,"9")
+        .replace(/۰/g,"0");
+
+
+    if(normalized === "1234"){
+
+        document
+        .getElementById("passwordPage")
+        .style.display="none";
+
+        document
+        .getElementById("evilPage")
+        .style.display="block";
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }else{
+
+        document
+        .getElementById("passwordError")
+        .textContent =
+        "رمز اشتباه است...";
+
+        document
+        .getElementById("passwordInput")
+        .value="";
+
+    }
+
+}
+
+
+/* =====================================================
+   ورود با دکمه Enter
+===================================================== */
+
+document
+.getElementById("passwordInput")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+
+        checkPassword();
+
+    }
+
+});
+
+
+/* =====================================================
+   جزئیات بخش مخفی
+===================================================== */
+
+function showEvilDetail(type){
+
+    const box = boxes[type];
+
+    document
+    .getElementById("evilProducts")
+    .style.display="none";
+
+    document
+    .getElementById("evilDetail")
+    .style.display="block";
+
+    document
+    .getElementById("evilDetailIcon")
+    .textContent=box.icon;
+
+    document
+    .getElementById("evilDetailTitle")
+    .textContent=box.title;
+
+    document
+    .getElementById("evilDetailText")
+    .textContent =
+        box.text +
+        " | بازه قیمت: " +
+        box.price;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   بستن جزئیات بخش مخفی
+===================================================== */
+
+function closeEvilDetail(){
+
+    document
+    .getElementById("evilDetail")
+    .style.display="none";
+
+    document
+    .getElementById("evilProducts")
+    .style.display="grid";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   خروج از بخش مخفی
+===================================================== */
+
+function leaveEvil(){
+
+    document
+    .getElementById("evilPage")
+    .style.display="none";
+
+    document
+    .getElementById("mainPage")
+    .style.display="block";
+
+    document
+    .getElementById("evilDetail")
+    .style.display="none";
+
+    document
+    .getElementById("evilProducts")
+    .style.display="grid";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
